@@ -1,96 +1,101 @@
-# 🚗 RAG-Based Car Recommendation System
+# 🚗 Find Your Car in Kiel – RAG-Based Recommendation System
 
 ## 📌 Overview
-This project implements a **Retrieval Augmented Generation (RAG)** based intelligent car recommendation system. It allows users to query vehicle preferences in natural language and returns personalized car recommendations using semantic retrieval, reranking, filtering, and large language model reasoning.
+This project implements a **Retrieval Augmented Generation (RAG)** based intelligent car recommendation assistant that allows users to search for vehicles using natural language queries.
 
-The system combines vector similarity search, cross-encoder reranking, structured filtering, and LLM-based explanation generation to provide accurate and user-friendly recommendations.
+Inspired by the AI search feature introduced by mobile.de, this project replicates a simplified version of next-generation marketplace search using real scraped vehicle listing data from the Kiel region in Germany.
+
+The system combines semantic retrieval, rule-based filtering, neural reranking, and local LLM reasoning to provide accurate and explainable car recommendations.
 
 ---
 
-## 🎯 Problem Statement
-Traditional car recommendation systems rely on static filters and keyword matching, which often fail to understand natural language queries or user intent.
+## 🎯 Motivation
+The used car market contains thousands of listings, making it difficult for buyers to find vehicles matching their needs. Traditional marketplace search systems rely heavily on static filters and keyword matching, which fail to capture human intent.
 
-This project addresses this limitation by:
-
-- Understanding user queries using semantic embeddings
-- Retrieving relevant car listings using vector search
-- Improving ranking accuracy using cross-encoder models
-- Applying rule-based filters (e.g., price constraints)
-- Generating explainable recommendations using LLM reasoning
+This project aims to bridge this gap by building an AI-powered search assistant that understands natural language queries and recommends relevant vehicles automatically.
 
 ---
 
 ## 🧠 System Architecture
 
-User Query  
-⬇  
-Embedding Generation  
-⬇  
-FAISS Vector Retrieval  
-⬇  
-Cross Encoder Reranking  
-⬇  
-Price Constraint Filtering  
-⬇  
-LLM Recommendation Generation  
-⬇  
-Streamlit UI Output  
+The RAG pipeline consists of four main stages:
+
+### 1️⃣ Ingestion & Indexing
+- Scraped car listing data is processed and cleaned
+- Text-based RAG context is generated
+- Embeddings are created using SentenceTransformers
+- Vector embeddings stored using FAISS
+
+### 2️⃣ Hybrid Retrieval
+- Semantic vector search retrieves top matching vehicles
+- Regex-based parser extracts strict price constraints
+- Metadata filtering ensures numerical accuracy
+
+### 3️⃣ Neural Reranking
+- Cross Encoder model refines relevance scoring
+- Ensures highly accurate recommendations
+
+### 4️⃣ LLM-Based Generation
+- Local LLM (Ollama – Qwen2.5:7B)
+- Generates natural language explanation for top 3 recommendations
+- Minimizes hallucination using structured prompts
 
 ---
 
 ## ⚙️ Features
-
 - Natural language vehicle search
-- Semantic similarity retrieval using Sentence Transformers
-- FAISS vector database for fast retrieval
-- Cross-encoder reranking for improved accuracy
-- Automatic price constraint extraction from user queries
-- LLM-generated reasoning for recommendations
-- Interactive Streamlit user interface
-- Local LLM inference using Ollama
+- Hybrid retrieval architecture
+- Price constraint extraction from user queries
+- Neural reranking for precision
+- Local LLM integration
+- Streamlit-based interactive UI
+- Real marketplace dataset
 
 ---
 
-## 🛠 Tech Stack
+## 🛠 Technology Stack
 
 ### Programming
 - Python
 
-### Machine Learning / NLP
+### Machine Learning & NLP
 - SentenceTransformers
-- CrossEncoder models
+- CrossEncoder (ms-marco-MiniLM-L-6-v2)
 
-### Retrieval
-- FAISS Vector Database
+### Vector Search
+- FAISS
 
 ### LLM Integration
-- Ollama (Local LLM Inference)
-- Qwen 2.5 Model
+- Ollama
+- Qwen2.5:7B Model
+
+### Data Collection
+- Selenium
+- Undetected Chromedriver
 
 ### UI
 - Streamlit
 
-### Data Processing
-- Pandas
-- NumPy
-
 ---
 
 ## 📊 Dataset
-The dataset was collected by scraping vehicle listing data from online automotive platforms. It includes:
+Vehicle listing data was scraped from **mobile.de**, Germany’s largest automotive marketplace.
 
-- Car model
+The dataset includes:
+- Vehicle model and description
 - Price
 - Mileage
 - Fuel type
+- Seller information
 - Listing links
-- Structured metadata
+
+Data was cleaned, normalized, and converted into JSONL format for efficient RAG processing.
 
 ---
 
-## ▶️ How To Run The Project
+## ▶️ How To Run
 
-### 1️⃣ Clone Repository
+### 1. Clone Repository
 ```bash
 git clone https://github.com/Karthik-Paluri/rag-car-recommendation-system.git
 cd rag-car-recommendation-system
